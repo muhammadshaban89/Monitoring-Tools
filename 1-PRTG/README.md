@@ -140,7 +140,8 @@ Major Drawbacks of PRTG (Based on User Reviews & Industry Analysis)
   
 **4. Mobile App Performance Is Weak**
 - Users report slow loading and limited functionality on mobile apps.
- 5. Limited Advanced Analytics
+
+**5. Limited Advanced Analytics**
 - PRTG focuses on monitoring, not deep analytics.
 - Lacks:
 - Predictive analysis
