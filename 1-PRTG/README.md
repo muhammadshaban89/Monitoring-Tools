@@ -55,11 +55,11 @@ PRTG collects data through:
 # Basic System Requirements for PRTG
 PRTG can be installed **on‑premises** or used as **PRTG Hosted**.
 
-# ✔️ **Operating System**
+**Operating System**
 - Windows Server 2016, 2019, 2022  
 - Windows 10/11 (for small deployments/testing)
 
-# ✔️ **Hardware Requirements**  
+**Hardware Requirements**  
 (Depends on number of sensors)
 
 | Deployment Size | CPU | RAM | Disk |
@@ -71,7 +71,7 @@ PRTG can be installed **on‑premises** or used as **PRTG Hosted**.
 PRTG documentation includes detailed system requirements.  
 
 
-# ✔️ **Network Requirements**
+ **Network Requirements**
 - Stable LAN/WAN  
 - SNMP enabled on devices  
 - Firewall rules allowing probe communication  
