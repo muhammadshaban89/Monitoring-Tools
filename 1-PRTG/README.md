@@ -126,19 +126,19 @@ Major Drawbacks of PRTG (Based on User Reviews & Industry Analysis)
 - Large deployments require multiple probes and careful tuning.
 - CPU load increases significantly as sensor count grows.
 
-**2. Pricing Becomes Expensive as You Scale **
+**2. Pricing Becomes Expensive as You Scale**
 - PRTG licenses are based on sensor count, not devices.
 - Even simple devices consume many sensors (CPU, RAM, disk, NIC, services).
 - Costs rise quickly for medium and large environments.
   
- **3. Heavy Resource Usage **
+ **3. Heavy Resource Usage**
 - PRTG can become processor‑intensive, especially with:
 - SNMP-heavy environments
 - Short scanning intervals
 - Many custom scripts
 - Large installations may require dedicated hardware.
   
-**4. Mobile App Performance Is Weak **
+**4. Mobile App Performance Is Weak**
 - Users report slow loading and limited functionality on mobile apps.
  5. Limited Advanced Analytics
 - PRTG focuses on monitoring, not deep analytics.
@@ -148,20 +148,20 @@ Major Drawbacks of PRTG (Based on User Reviews & Industry Analysis)
 - Advanced capacity planning
 (Compared to tools like Datadog or Dynatrace.)
 
-**6. Custom Sensors Require Scripting Skills **
+**6. Custom Sensors Require Scripting Skills**
 - SSH/EXE/HTTP custom sensors require:
 - Bash scripting
 - PowerShell
 - API knowledge
 - Errors like PE132 are common when formatting is strict.
   
-**7. Support Response Can Be Slow **
+**7. Support Response Can Be Slow**
 - Users report delays in technical support response times.
   
- **8. UI Can Feel Outdated **
+ **8. UI Can Feel Outdated**
 - While functional, the interface is not as modern or fluid as newer cloud‑native tools.
   
-**9. Limited Cloud-Native Monitoring **
+**9. Limited Cloud-Native Monitoring**
 - PRTG is strongest in on‑prem and network monitoring.
 - Cloud monitoring (AWS, Azure, GCP) is available but not as deep as cloud‑native platforms.
 
