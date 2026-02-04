@@ -29,6 +29,7 @@ Probes are responsible for collecting monitoring data.
 **Local Probe**
 - Installed automatically with the core server.  
 - It performs monitoring inside the same network.
+  
 **Remote Probes**
 Used for:
 - Distributed monitoring  
