@@ -45,11 +45,9 @@ Nagios uses a modular architecture:
 **3. NRPE / NRDP / Agentless Monitoring**
 
 - 1-NRPE: Nagios Remote Plugin Executor
-
   * Runs checks on remote Linux/Unix systems.
     
-* How it works
-  
+* How it works?
 - You install NRPE agent on the remote Linux server.
 - Nagios server connects to it over TCP port 5666.
 - Nagios tells NRPE: “Run this plugin and give me the result.”
@@ -59,24 +57,19 @@ Nagios uses a modular architecture:
 - 2-NRDP: Nagios Remote Data Processor
   
   * Nagios does not poll the host.
-    
   * Instead, the host pushes results to Nagios.
     
  * How it works
-   
-• 	Remote host sends results to Nagios via HTTP/HTTPS
-
-• 	No need for Nagios to connect to the host
-
-• 	Uses a simple XML/JSON payload
-
-• 	Works with firewalls easily (port 80/443)
+- Remote host sends results to Nagios via HTTP/HTTPS
+- No need for Nagios to connect to the host
+- Uses a simple XML/JSON payload
+- Works with firewalls easily (port 80/443)
 
 
 - 3-SNMP: Used for network devices.
-  
 - 4-Agentless: Uses SSH or API calls.
-
+----
+ 
  **4. Web Interface**
 - Displays host/service status, alerts, logs, and reports.
   
