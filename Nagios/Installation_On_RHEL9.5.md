@@ -330,5 +330,25 @@ Windows Monitoring
 
 Cloud / Remote Sites
 - NRDP → 80/443
+  
+**Port 5666 — NRPE (Nagios Remote Plugin Executor)**
+- Most important and most commonly used.
+- Nagios connects to a remote Linux/Unix/Windows host and tells it:
+
+    “Run this plugin locally and give me the result.”
+
+
+**Port 5667 — NSCA (Nagios Service Check Acceptor)**
+
+- Used for passive checks.
+- Remote hosts send results TO Nagios instead of Nagios polling them.
+  
+**Port 5668 — NRDP (Nagios Remote Data Processor)**
+- Modern replacement for NSCA
+- Same purpose as NSCA but uses HTTP/HTTPS instead of a custom binary protocol.
+
+
+
+
 -------------
 
