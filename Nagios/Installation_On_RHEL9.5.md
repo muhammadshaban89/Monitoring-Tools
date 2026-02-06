@@ -1,8 +1,7 @@
-### Overview
+Nagios Installation on RHEL:
+----------------------------
 
-Let’s do a clean, **from‑source Nagios Core install on RHEL 9.5**, step by step, with *why* behind each command so it’s not just copy‑paste but real understanding.
-
-I’ll assume:
+I will assume :
 
 - Fresh RHEL 9.5 server  
 - You have root (or sudo)  
@@ -312,3 +311,24 @@ systemctl reload nagios
 ```
 
 ---
+
+Quick Summary For Nagios Ports:
+----
+
+Nagios Web UI
+- 80 / 443
+
+Linux Monitoring
+- NRPE → 5666
+- SSH → 22
+- SNMP → 161/162
+
+Windows Monitoring
+- NSClient++ (NRPE) → 5666
+- NSClient++ (Legacy) → 12489
+- WMI → 5985/5986
+
+Cloud / Remote Sites
+- NRDP → 80/443
+-------------
+
