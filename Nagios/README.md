@@ -61,7 +61,7 @@ Nagios uses a modular architecture:
 - No need for Nagios to connect to the host
 - Uses a simple XML/JSON payload
 - Works with firewalls easily (port 80/443)
-
+----
 
 - 3-SNMP: Used for network devices.
 - 4-Agentless: Uses SSH or API calls.
