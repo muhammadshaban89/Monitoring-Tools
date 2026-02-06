@@ -1,5 +1,6 @@
 
-#SELINUX 
+SELINUX 
+-------
 
 - SELinux, when enforcing, **blocks** many of these actions unless you explicitly allow them.
 
