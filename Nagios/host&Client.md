@@ -719,3 +719,6 @@ systemctl restart nagios
 - Restarts Nagios to apply changes.
 
 ---
+
+After that You can open browser  : `http//ip/nagios`  ,it will open Nagios Web-UI.
+----
