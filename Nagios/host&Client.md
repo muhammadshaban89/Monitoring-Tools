@@ -367,6 +367,7 @@ Without this, you might not reach `http://server/nagios` from your browser.
 ---
 
 ## Part 2 – NRPE client (Linux host to be monitored)
+------------------------------------------------------
 
 ### Step 1 — Install required packages
 
@@ -462,7 +463,9 @@ make install-config
 ### Step 7 — Add NRPE to /etc/services
 
 ```bash
-echo "nrpe 5666/tcp" >> /etc/services
+sh -c "echo >> /etc/services"
+sh -c "sudo echo 'Nagios Services' >> /etc/services"
+sh -c "sudo echo 'nrpe 5666/tcp' >> /etc/services"
 ```
 
 **What this does:**
@@ -507,10 +510,29 @@ dont_blame_nrpe=1
 - **allowed_hosts** → Only this IP (Nagios server) can talk to NRPE.
 - **dont_blame_nrpe=1** → Allows passing arguments from Nagios (needed for flexible commands).
 
+- Then Uncomment all:
+
+**MISC System matric**
+
+
 You also define commands like:
+
+- If you want to monitor HTTP, HTTPS, FTP, Disk Free, and Memory Utilization for a Linux client in Nagios, you need to add two things:
+1. 	NRPE commands on the client (so the client knows what to execute)
+2. 	Service definitions on the Nagios server (so Nagios knows what to check)
+
+You do NOT add these in one place.
+
+You add commands on the client and services on the server.
 
 ```ini
 command[check_root]=/usr/local/nagios/libexec/check_disk -w 20% -c 10% -p /
+command[check_disk_home]=/usr/local/nagios/libexec/check_disk -w 20% -c 10% -p /home
+command[check_http]=/usr/local/nagios/libexec/check_http -I 127.0.0.1
+command[check_https]=/usr/local/nagios/libexec/check_http -I 127.0.0.1 -S
+command[check_mem]=/usr/local/nagios/libexec/check_mem -w 80 -c 90
+
+
 ```
 
 **Why it matters:**  
@@ -531,7 +553,7 @@ firewall-cmd --reload
 
 ---
 
-## Part 3 – Glue on the server (host + service definitions)
+## Part 3 – Glue on the server (host + service definitions)  -At server Side 
 
 ### Step 11 — Create servers directory
 
@@ -570,20 +592,25 @@ cfg_dir=/usr/local/nagios/etc/servers
 ---
 
 ### Step 13 — Add NRPE command
+- Define modules here  i.e things to monitor.
 
 ```bash
 vi /usr/local/nagios/etc/objects/commands.cfg
 ```
 
-Add:
+Add at end of this file:
 
 ```cfg
 define command{
     command_name    check_nrpe
     command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -t 30 -c $ARG1$
 }
-```
 
+
+```
+- This is the only command you need on the server.
+- Everything else is handled by NRPE on the client.
+  
 **What this does:**
 
 - Defines a reusable command `check_nrpe`.
@@ -599,7 +626,8 @@ This is the bridge between Nagios and NRPE.
 ### Step 14 — Create host config
 
 ```bash
-vi /usr/local/nagios/etc/servers/primary.server.local.cfg
+vi /usr/loacal/nagios/etc/servers/yourhost.cfg
+
 ```
 
 Add:
@@ -616,19 +644,51 @@ define host{
     notification_period     24x7
 }
 
-define service{
-    use                     generic-service
-    host_name               primary.server.local
-    service_description     Root / Partition
-    check_command           check_nrpe!check_root
-}
-
+#For Ping
 define service{
     use                     generic-service
     host_name               primary.server.local
     service_description     PING
     check_command           check_ping!200.0,20%!400.0,90%
+#check_ping!warning_threshold!critical_threshold
 }
+#For HTTP
+define service{
+    use                     generic-service
+    host_name               primary.server.local
+    service_description     HTTP Service
+    check_command           check_nrpe!check_http
+}
+#For HTTPS
+define service{
+    use                     generic-service
+    host_name               primary.server.local
+    service_description     HTTPS Service
+    check_command           check_nrpe!check_https
+}
+#For FTP
+define service{
+    use                     generic-service
+    host_name               primary.server.local
+    service_description     FTP Service
+    check_command           check_nrpe!check_ftp
+}
+#For Disk Free 
+define service{
+    use                     generic-service
+    host_name               primary.server.local
+    service_description     Disk Free /
+    check_command           check_nrpe!check_disk_root
+}
+
+#For Memory Utilization
+define service{
+    use                     generic-service
+    host_name               primary.server.local
+    service_description     Memory Utilization
+    check_command           check_nrpe!check_mem
+}
+
 ```
 
 **What this does:**
@@ -636,7 +696,7 @@ define service{
 - **Host block** → Defines the client machine:
   - `host_name` → logical name used in Nagios.
   - `address` → IP address of the client.
-- **Service Root /** → Uses NRPE:
+- **Service A service block defines the thing you want to check on that machine
   - `check_command check_nrpe!check_root`
   - `check_root` must exist in `nrpe.cfg` on the client.
 - **Service PING** → Uses local `check_ping` plugin from Nagios server.
