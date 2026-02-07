@@ -76,7 +76,7 @@ Using a variable makes it easy to upgrade later—just change `VER` once instead
 ### Step 4 — Download & extract Nagios Core
 
 ```bash
-curl -SL https://github.com/NagiosEnterprises/nagioscore/releases/download/nagios-$VER/nagios-$VER.tar.gz | tar -xvf -
+curl -SL https://github.com/NagiosEnterprises/nagioscore/releases/download/nagios-$VER/nagios-$VER.tar.gz | tar -xzvf -
 ```
 
 **What this does:**
