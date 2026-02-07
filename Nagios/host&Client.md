@@ -105,11 +105,80 @@ cd nagios-$VER
 **Why it matters:**  
 If something is missing (e.g., `gd-devel`), `./configure` will fail and tell you what to install.
 
-- - Installing the pluginS:
+— **Install NRPE plugin on the Nagios SERVER**
+
+* Nagios Core does **NOT** include the `check_nrpe` plugin.  
+* You must install it separately so the server can communicate with NRPE clients.
+
+---
+
+**Step A — Download NRPE source**
+```bash
+cd /tmp
+curl -LO https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-4.1.0/nrpe-4.1.0.tar.gz
+tar -xzf nrpe-4.1.0.tar.gz
+cd nrpe-4.1.0
+```
+
+---
+
+**Step B — Configure NRPE**
+```bash
+./configure
+```
+
+---
+**Step C — Compile ONLY the check_nrpe plugin**
+```bash
+make check_nrpe
+```
+
+This builds:
 
 ```
-make check_nrpe
+./src/check_nrpe
+```
+
+---
+**Step D — Install the plugin**
+```bash
 make install-plugin
+```
+
+This installs:
+
+```
+/usr/local/nagios/libexec/check_nrpe
+```
+
+**Why this matters**  
+- Without this plugin, Nagios cannot talk to NRPE clients.  
+- This was the exact reason you saw:
+
+```
+execvp(/usr/local/nagios/libexec/check_nrpe) failed. errno 2
+```
+
+---
+
+**Step E — Verify plugin installation**
+```bash
+ls -l /usr/local/nagios/libexec/check_nrpe
+```
+
+You should now see the binary.
+
+---
+
+**Step F — Test NRPE communication**
+```bash
+/usr/local/nagios/libexec/check_nrpe -H <client-ip> -c check_root
+```
+
+If NRPE is working, you’ll get output like:
+
+```
+DISK OK - free space: / 40% ...
 ```
 
 ---
