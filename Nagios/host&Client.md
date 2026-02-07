@@ -105,6 +105,13 @@ cd nagios-$VER
 **Why it matters:**  
 If something is missing (e.g., `gd-devel`), `./configure` will fail and tell you what to install.
 
+- - Installing the pluginS:
+
+```
+make check_nrpe
+make install-plugin
+```
+
 ---
 
 ### Step 6 — Compile Nagios
