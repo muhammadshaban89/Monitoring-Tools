@@ -295,7 +295,8 @@ systemctl restart httpd
 
 ```bash
 export VER="2.4.6"
-curl -SL https://github.com/nagios-plugins/nagios-plugins/releases/download/release-$VER/nagios-plugins-$VER.tar.gz | tar -xvf -
+curl -SL https://github.com/nagios-plugins/nagios-plugins/releases/download/release-$VER/nagios-plugins-$VER.tar.gz \
+  | tar -xzvf -
 cd nagios-plugins-$VER
 
 ./configure --with-nagios-user=nagios --with-nagios-group=nagios
