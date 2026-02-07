@@ -634,7 +634,7 @@ This is the bridge between Nagios and NRPE.
 ### Step 14 — Create host config
 
 ```bash
-vi /usr/loacal/nagios/etc/servers/yourhost.cfg
+vi /usr/local/nagios/etc/servers/yourhost.cfg
 
 ```
 
