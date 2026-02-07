@@ -615,9 +615,16 @@ define command{
 **What this does:**
 
 - Defines a reusable command `check_nrpe`.
-- `$USER1$` → usually `/usr/local/nagios/libexec`.
-- `-H $HOSTADDRESS$` → target host IP.
-- `-c $ARG1$` → NRPE command name (e.g., `check_root`).
+- Each part has a purpose:
+
+| Part | Meaning |
+|------|---------|
+| `$USER1$` | Path to Nagios plugins directory (usually `/usr/local/nagios/libexec`) |
+| `check_nrpe` | The plugin that talks to NRPE on the client |
+| `-H $HOSTADDRESS$` | IP of the client being monitored |
+| `-t 30` | Timeout (30 seconds) |
+| `-c $ARG1$` | The NRPE command name defined on the client |
+
 
 **Why it matters:**  
 This is the bridge between Nagios and NRPE.
