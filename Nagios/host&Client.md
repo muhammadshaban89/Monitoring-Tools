@@ -105,7 +105,8 @@ cd nagios-$VER
 **Why it matters:**  
 If something is missing (e.g., `gd-devel`), `./configure` will fail and tell you what to install.
 
-— **Install NRPE plugin on the Nagios SERVER**
+
+- **Install NRPE plugin on the Nagios SERVER**
 
 * Nagios Core does **NOT** include the `check_nrpe` plugin.  
 * You must install it separately so the server can communicate with NRPE clients.
@@ -153,13 +154,6 @@ This installs:
 
 **Why this matters**  
 - Without this plugin, Nagios cannot talk to NRPE clients.  
-- This was the exact reason you saw:
-
-```
-execvp(/usr/local/nagios/libexec/check_nrpe) failed. errno 2
-```
-
----
 
 **Step E — Verify plugin installation**
 ```bash
