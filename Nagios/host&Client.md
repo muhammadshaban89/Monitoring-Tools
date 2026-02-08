@@ -641,7 +641,10 @@ dnf install nagios-plugins-all -y
 ```BASH
  dnf install nagios-plugins -y
 ```
-
+- check plugin veraion:
+```bash
+/usr/local/nagios/libexec/check_nrpe -V
+```
 
 ### Step 11 — Open firewall port
 
