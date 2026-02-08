@@ -347,6 +347,14 @@ This installs:
 ```
 /usr/local/nagios/libexec/check_nrpe
 ```
+- Check nagios plugin Version:
+```bash
+/usr/local/nagios/libexec/check_ping -V
+```
+-if installed with RPM :
+```bash
+rpm -qi nagios-plugins-all
+```
 
 **What this does:**
 
