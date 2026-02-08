@@ -602,6 +602,8 @@ command[check_disk_home]=/usr/local/nagios/libexec/check_disk -w 20% -c 10% -p /
 command[check_http]=/usr/local/nagios/libexec/check_http -I 127.0.0.1
 command[check_https]=/usr/local/nagios/libexec/check_http -I 127.0.0.1 -S
 command[check_mem]=/usr/local/nagios/libexec/check_mem -w 80 -c 90
+command[check_ftp]=/usr/local/nagios/libexec/check_ftp -H 127.0.0.1
+
 
 
 ```
