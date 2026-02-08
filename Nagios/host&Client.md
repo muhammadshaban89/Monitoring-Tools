@@ -753,7 +753,7 @@ This is the bridge between Nagios and NRPE.
 
 ---
 
-### Step 14 — Create host config
+### Step 4 — Create host config
 
 ```bash
 vi /usr/local/nagios/etc/servers/yourhost.cfg
@@ -836,7 +836,24 @@ This is where you actually tell Nagios: “Monitor this host and these services.
 
 ---
 
-### Step 15 — Restart Nagios
+- Full Flow:
+```yaml
+Nagios service definition
+        ↓
+check_command check_nrpe!check_root
+        ↓
+commands.cfg → check_nrpe command
+        ↓
+/usr/local/nagios/libexec/check_nrpe -H 172.16.0.104 -c check_root
+        ↓
+Client NRPE → nrpe.cfg → command[check_root]
+        ↓
+Plugin executes → check_disk
+        ↓
+Result returned to Nagios
+```
+
+### Step 5 — Restart Nagios
 
 ```bash
 /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
