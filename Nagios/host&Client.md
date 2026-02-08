@@ -300,9 +300,9 @@ systemctl restart httpd
 **Step A — Download NRPE source**
 ```bash
 cd /tmp
-curl -LO https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-4.1.0/nrpe-4.1.0.tar.gz
-tar -xzf nrpe-4.1.0.tar.gz
-cd nrpe-4.1.0
+wget https://nagios-plugins.org/download/nagios-plugins-2.4.6.tar.gz
+tar -zxvf nagios-plugins-2.4.6.tar.gz
+cd nagios-plugins-2.4.6
 ```
 
 ---
