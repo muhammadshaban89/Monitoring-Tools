@@ -61,6 +61,24 @@ Username: your-email@gmail.com
 Password: your-app-password
 ```
 
+- Gmail requires an App Password (not your normal password)
+- Google blocks SMTP login using your normal Gmail password.
+  
+You must create a Google App Password.
+Steps:
+1. 	Go to: https://myaccount.google.com
+2. 	Login to your Gmail account
+3. 	Go to Security
+4. 	Enable 2‑Step Verification
+5. 	After enabling it, a new option appears: App Passwords
+6. 	Create a new App Password
+7. 	Choose:
+• 	App: Mail
+• 	Device: Other → type Zabbix
+8. 	Google will give you a 16‑character password
+Use that password in Zabbix.
+
+
 Example for Office365:
 
 ```
