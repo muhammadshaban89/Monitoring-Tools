@@ -12,7 +12,7 @@ This is the kind of summary you'd give in an interview or documentation.
 
 ---
 
-# ⭐ **What is Zabbix?**
+# **What is Zabbix?**
 
 **Zabbix is an open‑source enterprise‑grade monitoring platform** used to monitor:
 
@@ -31,7 +31,7 @@ Think of Zabbix as a **central monitoring brain** for your entire infrastructure
 
 ---
 
-# ⭐ **Why is Zabbix Used?**
+# **Why is Zabbix Used?**
 
 Organizations use Zabbix to:
 
@@ -47,7 +47,7 @@ It is widely used because it is **free, powerful, scalable, and customizable**.
 
 ---
 
-# ⭐ **Key Features of Zabbix**
+#  **Key Features of Zabbix**
 
 ### **1. Agent-based + Agentless Monitoring**
 - Zabbix Agent for deep OS metrics  
@@ -100,7 +100,7 @@ Can monitor:
 
 ---
 
-# ⭐ **Advantages of Zabbix**
+#  **Advantages of Zabbix**
 
 ### **1. Completely Free (Open Source)**
 No license cost — ideal for labs, enterprises, and MSPs.
@@ -137,7 +137,7 @@ Native integration with:
 
 ---
 
-# ⭐ **Disadvantages of Zabbix**
+#  **Disadvantages of Zabbix**
 
 ### **1. Steep Learning Curve**
 Configuration is complex for beginners.
@@ -169,7 +169,7 @@ Large environments need:
 
 ---
 
-# ⭐ **When Should You Use Zabbix?**
+#  **When Should You Use Zabbix?**
 
 Use Zabbix if you need:
 
@@ -190,7 +190,7 @@ Perfect for:
 
 ---
 
-# ⭐ **When Zabbix Is NOT Ideal**
+#  **When Zabbix Is NOT Ideal**
 
 Avoid Zabbix if you need:
 
@@ -201,7 +201,7 @@ Avoid Zabbix if you need:
 
 ---
 
-# ⭐ **Key Points (Interview-Ready Summary)**
+#  **Key Points (Interview-Ready Summary)**
 
 - Zabbix is an **open-source enterprise monitoring platform**  
 - Supports **servers, networks, cloud, virtualization, applications**  
@@ -215,7 +215,7 @@ Avoid Zabbix if you need:
 
 
 
-# ⭐ **1. Full Zabbix Architecture Diagram (Server + Proxy + Agents + DB + Frontend)**
+#  **1. Full Zabbix Architecture Diagram (Server + Proxy + Agents + DB + Frontend)**
 
 Below is a clean, realistic architecture diagram you can use in documentation or interviews.
 
@@ -275,13 +275,13 @@ This is the standard enterprise Zabbix architecture.
 
 ---
 
-# ⭐ **2. Zabbix Interview Q&A (Professional, Concise, Real‑World)**
+#  **2. Zabbix Interview Q&A (Professional, Concise, Real‑World)**
 
 Below is a curated list of the most common and important Zabbix interview questions — with clean, sharp answers.
 
 ---
 
-# 🔥 **Basic Questions**
+#  **Basic Questions**
 
 ### **Q1: What is Zabbix?**
 Zabbix is an open‑source enterprise monitoring platform used to monitor servers, networks, applications, cloud, and virtualization environments. It supports agent‑based and agentless monitoring and provides alerting, dashboards, and automation.
@@ -309,7 +309,7 @@ And sends them to the Zabbix Server or Proxy.
 
 ---
 
-# 🔥 **Intermediate Questions**
+#  **Intermediate Questions**
 
 ### **Q4: What is a Zabbix Proxy and why is it used?**
 A proxy collects monitoring data on behalf of the server.  
@@ -357,7 +357,7 @@ No agent required.
 
 ---
 
-# 🔥 **Advanced Questions**
+#  **Advanced Questions**
 
 ### **Q8: What is the difference between Passive and Active checks?**
 
@@ -448,7 +448,7 @@ Useful for APIs, logs, and custom scripts.
 
 ---
 
-# ⭐ **Bonus: Short Summary for Interviews**
+#  **Bonus: Short Summary for Interviews**
 
 Here’s a crisp summary you can use in interviews:
 
