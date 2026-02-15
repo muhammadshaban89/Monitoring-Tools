@@ -189,7 +189,11 @@ SHOW DATABASES;
 
 ```sql
 CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'your_actual_password';
-GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'%' IDENTIFIED BY 'your_actual_password';
+CREATE USER 'zabbix'@'%' IDENTIFIED BY 'your_actual_password';
+
+GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'localhost';
+GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'%';
+
 FLUSH PRIVILEGES;
 SET GLOBAL log_bin_trust_function_creators = 1;
 ```
