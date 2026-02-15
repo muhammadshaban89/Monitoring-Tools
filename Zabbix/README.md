@@ -8,8 +8,6 @@ Zabbix:
 - Disadvantages  
 - When to choose it (and when not to)  
 
-This is the kind of summary you'd give in an interview or documentation.
-
 ---
 
 # **What is Zabbix?**
