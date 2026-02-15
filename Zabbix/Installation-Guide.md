@@ -123,9 +123,9 @@ dnf install zabbix-server-mysql zabbix-sql-scripts zabbix-web-mysql zabbix-apach
 # **6. Install and Configure MySQL/MariaDB**
 
 ```bash
-dnf  install -y mariadb 
-systemtctl enable --now mariadb
-systemctl status maria db
+yum install mariadb* -y
+systemctl enable --now mariadb
+systemctl status mariadb
 mysql_secure_installation
 
 ```
@@ -138,12 +138,12 @@ mysql_secure_installation
 ###  Troubleshooting
 - **mysqld fails to start:**  
   ```
-  journalctl -xeu mysqld
+  journalctl -xeu mariadb
   ```
 - **Cannot run mysql_secure_installation:**  
   Ensure DB is running:
   ```
-  systemctl start mysqld
+  systemctl start mariadb
   ```
 
 ---
