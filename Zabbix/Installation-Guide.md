@@ -14,7 +14,7 @@ dnf update -y
 - Prevents dependency conflicts during Zabbix installation  
 - Applies security patches and bug fixes  
 
-### 🛠 Troubleshooting
+###  Troubleshooting
 - **Update fails:**  
   Check internet connectivity:
   ```
