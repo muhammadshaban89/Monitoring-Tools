@@ -216,12 +216,28 @@ SET GLOBAL log_bin_trust_function_creators = 1;
 # **10. Import Initial Schema**
 
 ```bash
-zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u zabbix -p zabbix
-```
+mysql -uroot -p'ROOTPASSWORD' -e "SET GLOBAL innodb_strict_mode='OFF';"
 
+zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p'xyz' zabbix
+
+mysql -uroot -p'root password' -e "SET GLOBAL innodb_strict_mode='ON';"
+```
 ###  Why we do this
 - Loads all Zabbix tables, indexes, and default data  
-- Without this, Zabbix server cannot start  
+- Without this, Zabbix server cannot start
+- Some MySQL/MariaDB versions enforce strict rules on:
+- index lengths
+- row formats
+- foreign key constraints
+- default values
+  
+The Zabbix schema (especially older versions) contains:
+- long index names
+- large VARCHAR fields
+- stored functions
+- triggers
+These may fail when innodb_strict_mode=ON.
+So the import may break with errors
 
 ###  Troubleshooting
 - **File not found:**  
