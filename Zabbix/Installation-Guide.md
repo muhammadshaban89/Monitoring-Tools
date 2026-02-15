@@ -40,7 +40,7 @@ yum clean all
 - This repo provides official, stable Zabbix packages  
 - `yum clean all` refreshes metadata so the repo is recognized  
 
-### 🛠 Troubleshooting
+###  Troubleshooting
 - **Repo not added:**  
   ```
   ls /etc/yum.repos.d | grep zabbix
@@ -146,7 +146,7 @@ CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
 ```sql
 CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'your_actual_password';
-GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'%' identified by 'emaaz@123';
+GRANT ALL PRIVILEGES ON zabbix.* TO 'zabbix'@'%' IDENTIFIED BY 'your_actual_password';
 FLUSH PRIVILEGES;
 SET GLOBAL log_bin_trust_function_creators = 1;
 ```
@@ -156,7 +156,7 @@ SET GLOBAL log_bin_trust_function_creators = 1;
 - Grants full access to Zabbix DB  
 - `log_bin_trust_function_creators` required for stored functions  
 
-### 🛠 Troubleshooting
+###  Troubleshooting
 - **User not created:**  
   ```
   SELECT user,host FROM mysql.user;
@@ -176,7 +176,7 @@ zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u zabbix -p zabb
 - Loads all Zabbix tables, indexes, and default data  
 - Without this, Zabbix server cannot start  
 
-### 🛠 Troubleshooting
+###  Troubleshooting
 - **File not found:**  
   ```
   ls /usr/share/zabbix-sql-scripts/mysql/
@@ -261,11 +261,11 @@ firewall-cmd --permanent --add-service=http
 firewall-cmd --reload
 ```
 
-### ✅ Why we do this
+###  Why we do this
 - Port 10051 → Zabbix server  
 - HTTP → Zabbix frontend  
 
-### 🛠 Troubleshooting
+###  Troubleshooting
 - Test port:
   ```
   ss -tulpn | grep 10051
