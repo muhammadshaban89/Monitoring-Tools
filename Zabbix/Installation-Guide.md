@@ -3,7 +3,41 @@
 
 ---
 
-# **1. System Update**
+#### **1. Set hostname**
+
+```bash
+hostnamectl set-hostname FQDN
+```
+
+**What this does:**  
+This sets the **permanent hostname** of the server (e.g. `zabbix.lab.local`). The hostname is used by:
+
+- Zabbix frontend (it may show in UI and logs)  
+- SSL certificates (if you use HTTPS later)  
+- DNS resolution and general identification  
+
+**Why it matters:**  
+A stable, meaningful hostname avoids confusion when you have multiple monitored systems and makes logs, alerts, and dashboards easier to understand.
+
+---
+
+#### **2. SELinux mode**
+
+```bash
+sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config && setenforce 0
+```
+
+**What this does:**
+
+- Edits `/etc/selinux/config` so that after reboot, SELinux will be in **permissive** mode.
+- `setenforce 0` switches the current running mode from **enforcing** to **permissive** immediately.
+
+**Why it matters:**  
+Zabbix involves multiple components (Apache, PHP, MariaDB, Zabbix server, agent). SELinux in enforcing mode can silently block some of their interactions unless you configure proper booleans and contexts. Setting it to permissive during initial setup avoids SELinux‑related issues while you’re still building and learning the stack.
+
+
+
+# **13. System Update**
 
 ```bash
 dnf update -y
@@ -28,7 +62,7 @@ dnf update -y
 
 ---
 
-# **2. Install Zabbix Repository**
+# **4. Install Zabbix Repository**
 
 ```bash
 rpm -Uvh https://repo.zabbix.com/zabbix/7.0/rhel/9/x86_64/zabbix-release-latest.el9.noarch.rpm
@@ -53,7 +87,7 @@ yum clean all
 
 ---
 
-# **3. Install Zabbix Server, Frontend, Agent**
+# **5. Install Zabbix Server, Frontend, Agent**
 
 ```bash
 dnf install zabbix-server-mysql zabbix-sql-scripts zabbix-web-mysql zabbix-apache-conf zabbix-agent -y
@@ -80,7 +114,7 @@ dnf install zabbix-server-mysql zabbix-sql-scripts zabbix-web-mysql zabbix-apach
 
 ---
 
-# **4. Install and Configure MySQL/MariaDB**
+# **6. Install and Configure MySQL/MariaDB**
 
 ```bash
 dnf -y install mysql-server
@@ -106,7 +140,7 @@ mysql_secure_installation
 
 ---
 
-# **5. Log into MySQL**
+# **7. Log into MySQL**
 
 ```bash
 mysql -u root -p
@@ -125,7 +159,7 @@ mysql -u root -p
 
 ---
 
-# **6. Create Zabbix Database**
+# **8. Create Zabbix Database**
 
 ```sql
 CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
@@ -142,7 +176,7 @@ CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
 ---
 
-# **7. Create Zabbix User + Privileges**
+# **9. Create Zabbix User + Privileges**
 
 ```sql
 CREATE USER 'zabbix'@'localhost' IDENTIFIED BY 'your_actual_password';
@@ -166,7 +200,7 @@ SET GLOBAL log_bin_trust_function_creators = 1;
 
 ---
 
-# **8. Import Initial Schema**
+# **10. Import Initial Schema**
 
 ```bash
 zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u zabbix -p zabbix
@@ -186,7 +220,7 @@ zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -u zabbix -p zabb
 
 ---
 
-# **9. Configure Zabbix Server**
+# **11. Configure Zabbix Server**
 
 ```bash
 vim /etc/zabbix/zabbix_server.conf
@@ -214,7 +248,7 @@ NodeAddress=localhost:10051
 
 ---
 
-# **10. Configure PHP for Zabbix Frontend**
+# **12. Configure PHP for Zabbix Frontend**
 
 ```bash
 vi /etc/php-fpm.d/zabbix.conf
@@ -226,7 +260,7 @@ systemctl enable --now httpd
 - Zabbix frontend requires correct timezone  
 - Apache must be running to serve UI  
 
-### 🛠 Troubleshooting
+###  Troubleshooting
 - **Timezone warning in UI:**  
   Restart PHP-FPM:
   ```
@@ -235,7 +269,7 @@ systemctl enable --now httpd
 
 ---
 
-# **11. Start Zabbix Server + Agent**
+# **13. Start Zabbix Server + Agent**
 
 ```bash
 systemctl enable --now zabbix-server zabbix-agent
@@ -253,7 +287,7 @@ systemctl enable --now zabbix-server zabbix-agent
 
 ---
 
-# **12. Configure Firewall**
+# **14. Configure Firewall**
 
 ```bash
 firewall-cmd --permanent --add-port=10051/tcp
@@ -273,7 +307,7 @@ firewall-cmd --reload
 
 ---
 
-# **13. Configure SELinux**
+# **15. Configure SELinux**
 
 ```bash
 setsebool -P httpd_can_network_connect on
@@ -291,7 +325,7 @@ setsebool -P httpd_can_network_connect on
 
 ---
 
-# **14. Access Zabbix Web Interface**
+# **16. Access Zabbix Web Interface**
 
 ```
 http://your_server_ip/zabbix
@@ -305,7 +339,7 @@ http://your_server_ip/zabbix
 
 ---
 
-# **15. Login with Default Credentials**
+# **17. Login with Default Credentials**
 
 ```
 Username: Admin
@@ -320,31 +354,38 @@ Password: zabbix
 #  **ZABBIX CLIENT INSTALLATION — WITH EXPLANATION + TROUBLESHOOTING**
 
 ---
-
-# **1. Set Hostname**
+#### **1. Set hostname**
 
 ```bash
 hostnamectl hostname zabbix.client.local
 ```
 
-###  Troubleshooting
-- Reboot if hostname does not update.
+**What this does:**
+
+- Sets the hostname of the client machine to something meaningful.
+
+**Why it matters:**  
+This hostname is what you’ll see in the Zabbix UI (if you configure the agent to use it). It helps you identify which machine is which when you have many clients.
 
 ---
 
-# **2. SELinux Handling**
+#### **2. SELinux handling on client**
 
 ```bash
 sed -i 's/^SELINUX=.*/SELINUX=permissive/g' etc/selinux/config && setenforce 0
+# or enable booleans
+setsebool -P  httpd_can_network_connect on
 ```
 
-###  Troubleshooting
-- Check mode:
-  ```
-  getenforce
-  ```
+**What this does:**
 
----
+- Either sets SELinux to permissive (less strict) or enables specific SELinux booleans to allow network connections.
+
+**Why it matters:**  
+On a client, SELinux can block the agent from accepting connections or sending data, depending on configuration. Relaxing it or setting proper booleans avoids silent failures.
+
+
+
 
 # **3. Add Zabbix Repo**
 
