@@ -27,6 +27,12 @@ A stable, meaningful hostname avoids confusion when you have multiple monitored 
 sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config && setenforce 0
 ```
 
+- or enable booleans
+```
+setsebool -P  httpd_can_network_connect on
+```
+
+
 **What this does:**
 
 - Edits `/etc/selinux/config` so that after reboot, SELinux will be in **permissive** mode.
@@ -37,7 +43,7 @@ Zabbix involves multiple components (Apache, PHP, MariaDB, Zabbix server, agent)
 
 
 
-# **13. System Update**
+# **3. System Update**
 
 ```bash
 dnf update -y
@@ -373,7 +379,9 @@ This hostname is what you’ll see in the Zabbix UI (if you configure the agent 
 
 ```bash
 sed -i 's/^SELINUX=.*/SELINUX=permissive/g' etc/selinux/config && setenforce 0
-# or enable booleans
+```
+- or enable booleans
+```
 setsebool -P  httpd_can_network_connect on
 ```
 
