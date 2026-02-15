@@ -429,6 +429,7 @@ On a client, SELinux can block the agent from accepting connections or sending d
 rpm -Uvh https://repo.zabbix.com/zabbix/7.0/rhel/9/x86_64/zabbix-release-latest.el9.noarch.rpm
 yum clean all
 ```
+
 - if client is centos7
 ```
 rpm -Uvh https://repo.zabbix.com/zabbix/7.0/rhel/7/x86_64/zabbix-release-latest.el7.noarch.rpm
