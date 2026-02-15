@@ -123,9 +123,11 @@ dnf install zabbix-server-mysql zabbix-sql-scripts zabbix-web-mysql zabbix-apach
 # **6. Install and Configure MySQL/MariaDB**
 
 ```bash
-dnf -y install mysql-server
-systemctl enable --now mysqld
+dnf  install -y mariadb 
+systemtctl enable --now mariadb
+systemctl status maria db
 mysql_secure_installation
+
 ```
 
 ###  Why we do this
