@@ -170,7 +170,10 @@ mysql -u root -p
 ```sql
 CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 ```
-
+- Show databases:
+```
+SHOW DATABASES;
+```
 ###  Why we do this
 - Zabbix needs its own dedicated DB  
 - `utf8mb4` supports full Unicode  
