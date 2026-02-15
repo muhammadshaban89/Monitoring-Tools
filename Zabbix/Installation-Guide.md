@@ -218,11 +218,11 @@ SET GLOBAL log_bin_trust_function_creators = 1;
 # **10. Import Initial Schema**
 
 ```bash
-mysql -uroot -p'ROOTPASSWORD' -e "SET GLOBAL innodb_strict_mode='OFF';"
+mysql -uroot -p'Emaaz@123' -e "SET GLOBAL innodb_strict_mode='OFF';"
 
-zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p'xyz' zabbix
+zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p zabbix
 
-mysql -uroot -p'root password' -e "SET GLOBAL innodb_strict_mode='ON';"
+mysql -uroot -p'Emaaz@123' -e "SET GLOBAL innodb_strict_mode='ON';"
 ```
 ###  Why we do this
 - Loads all Zabbix tables, indexes, and default data  
