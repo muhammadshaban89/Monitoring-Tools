@@ -283,7 +283,10 @@ NodeAddress=localhost:10051
 
 ```bash
 vi /etc/php-fpm.d/zabbix.conf
-php_value date.timezone Asia/Karachi
+```
+- Then add:
+```
+php_value[date.timezone] = Asia/Riyadh
 systemctl enable --now httpd
 ```
 
