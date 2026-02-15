@@ -35,10 +35,14 @@ Hostname=WINDOWS-HOSTNAME
 ```
 netsh advfirewall firewall add rule name="Zabbix Agent" dir=in action=allow protocol=TCP localport=10050
 ```
-
+
+
+
 5. Add host in Zabbix UI
+
 Use template:
+
 Template OS Windows by Zabbix agent
 
 
-==---
+------------
