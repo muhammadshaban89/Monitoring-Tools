@@ -6,7 +6,7 @@
 
 - **RHEL 9.5**  
   Runs **Prometheus + Grafana + node_exporter**  
-  → This is your *monitoring server*.
+  → This is  *monitoring server*.
 
 - **CentOS**  
   Runs **node_exporter**  
