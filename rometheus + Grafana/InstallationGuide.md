@@ -1,8 +1,8 @@
-**How to Deploy**
+###**How to Deploy?**
 
+----------
 
-
-## 1. Architecture
+## 1. Lab Architecture
 
 - **RHEL 9.5**  
   Runs **Prometheus + Grafana + node_exporter**  
