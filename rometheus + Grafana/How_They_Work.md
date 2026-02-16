@@ -161,39 +161,9 @@ Here’s the full pipeline:
 
 ---
 
-#  **6. Real Example (Your Setup)**
 
-### RHEL 9.5 (Monitoring Server)
-- Prometheus  
-- Grafana  
-- node_exporter  
 
-### CentOS Server
-- node_exporter  
-
-### Windows Server 2022
-- windows_exporter  
-
-### Prometheus config:
-
-```yaml
-scrape_configs:
-  - job_name: "rhel"
-    static_configs:
-      - targets: ["10.0.0.10:9100"]
-
-  - job_name: "centos"
-    static_configs:
-      - targets: ["10.0.0.20:9100"]
-
-  - job_name: "windows"
-    static_configs:
-      - targets: ["10.0.0.30:9182"]
-```
-
----
-
-# 🏁 **7. Summary (Simple Version)**
+# **6. Summary (Simple Version)**
 
 | Component | Role | Runs On | Port |
 |----------|------|---------|------|
