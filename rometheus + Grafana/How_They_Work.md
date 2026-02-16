@@ -1,5 +1,5 @@
 
-### In this section we will discuss how grafan+node Exporter and  Prometheus Works
+### In this section we will discuss how Grafana,Node Exporter and  Prometheus Works
 
 #  **1. Node Exporter — “The Data Collector”**
 
