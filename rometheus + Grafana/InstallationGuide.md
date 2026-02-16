@@ -114,7 +114,20 @@ ExecStart=/usr/local/bin/prometheus \
 [Install]
 WantedBy=multi-user.target
 EOF
+```
+- SELinux to permissive permanently:
+```
+sudo sed -i 's/^SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config && setenforce 0
+```
+- if You want to set Selinux to Enforcing , then:
+```
+sudo semanage port -a -t http_port_t -p tcp 9090   # Prometheus
+sudo semanage port -a -t http_port_t -p tcp 3000   # Grafana
+sudo semanage port -a -t http_port_t -p tcp 9100   # node_exporter
+```
+- Reload Deamon and enable services.
 
+```
 sudo systemctl daemon-reload
 sudo systemctl enable --now prometheus
 sudo systemctl status prometheus
@@ -189,10 +202,20 @@ ExecStart=/usr/local/bin/node_exporter
 [Install]
 WantedBy=multi-user.target
 EOF
-
+```
+- Reload Daemon and start services:
+```
 sudo systemctl daemon-reload
 sudo systemctl enable --now node_exporter
 sudo systemctl status node_exporter
+```
+
+- Add Firewall Rules:
+```
+sudo firewall-cmd --permanent --add-port=9090/tcp   # Prometheus
+sudo firewall-cmd --permanent --add-port=3000/tcp   # Grafana
+sudo firewall-cmd --permanent --add-port=9100/tcp   # node_exporter
+sudo firewall-cmd --reload
 ```
 
 **Explanation:**
@@ -205,6 +228,11 @@ sudo systemctl status node_exporter
   Starts exporter on default port `9100`.
 - **`enable --now`**  
   Auto‑start at boot + start now.
+- Add firewall rules to allow ports. 9090/tcp 3000/tcp & 9100/tcp.
+-  `firewall-cmd --permanent` adds rules to the persistent configuration.
+- `--reload` applies them without reboot.
+- You may restrict sources (e.g., only your admin IP) later for security.
+  
 - **Metrics URL**  
   `http://<RHEL-IP>:9100/metrics` → raw metrics Prometheus will scrape.
 
@@ -255,6 +283,9 @@ sudo systemctl status grafana-server
   Access via `http://<RHEL-IP>:3000` → login `admin / admin` (then change password).
 
 ---
+
+### Client Side
+---------------
 
 ## 6. Install node_exporter on CentOS host(s)
 
@@ -307,7 +338,9 @@ ExecStart=/usr/local/bin/node_exporter
 [Install]
 WantedBy=multi-user.target
 EOF
-
+```
+- Reload Daem and Start Services:
+```
 sudo systemctl daemon-reload
 sudo systemctl enable --now node_exporter
 ```
@@ -319,6 +352,31 @@ sudo systemctl enable --now node_exporter
 
 You must ensure the CentOS firewall allows port `9100` from the RHEL Prometheus server.
 
+- Check Selinux and Set to permissive or Set boolean in case you want to Enforce it.
+
+```
+sestatus
+
+#Set it permessive :
+
+sudo sed -i 's/^SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config && setenforce 0
+
+# I you wand Enforcing ,then allow & Verify
+
+sudo semanage port -a -t http_port_t -p tcp 9100
+sudo semanage port -l | grep 9100
+
+```
+
+- Add Firewall Rules:
+```
+sudo firewall-cmd --permanent --add-port=9100/tcp
+sudo firewall-cmd --reload
+```
+- Restart the servivice:
+```
+sudo systemctl restart node_exporter
+```
 ---
 
 ## 7. Install windows_exporter on Windows Server 2022
@@ -458,6 +516,7 @@ In Grafana:
 
 ---
 
+
 ## 11. Firewall checklist (RHEL side)
 
 ```bash
@@ -474,4 +533,3 @@ sudo firewall-cmd --reload
 - You may restrict sources (e.g., only your admin IP) later for security.
 
 ---
-
