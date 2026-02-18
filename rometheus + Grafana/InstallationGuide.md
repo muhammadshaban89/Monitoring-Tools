@@ -475,7 +475,7 @@ New-NetFirewallRule -DisplayName "windows_exporter" -Direction Inbound -Protocol
 
 ---
 
-## 8. Configure Prometheus to scrape all targets
+## 8. Configure Prometheus to scrape all targets  -Run this on server
 
 Edit config on RHEL:
 
