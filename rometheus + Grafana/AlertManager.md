@@ -20,15 +20,33 @@ Alertmanager is a separate binary from Prometheus.
 
 ```bash
 cd /tmp
-curl -LO https://github.com/prometheus/alertmanager/releases/latest/download/alertmanager-*.linux-amd64.tar.gz
-tar -xvf alertmanager-*.linux-amd64.tar.gz
-cd alertmanager-*.linux-amd64
 
-sudo mv alertmanager amtool /usr/local/bin/
-sudo mkdir /etc/alertmanager
-sudo mv alertmanager.yml /etc/alertmanager/
+# Get latest Alertmanager version
+LATEST=$(curl -s https://api.github.com/repos/prometheus/alertmanager/releases/latest | grep tag_name | cut -d '"' -f 4)
+
+# Download correct tarball
+curl -LO https://github.com/prometheus/alertmanager/releases/download/${LATEST}/alertmanager-${LATEST#v}.linux-amd64.tar.gz
+
+# Extract
+tar -xvf alertmanager-${LATEST#v}.linux-amd64.tar.gz
+
+# Move binaries
+sudo mv alertmanager-${LATEST#v}.linux-amd64/alertmanager /usr/local/bin/
+sudo mv alertmanager-${LATEST#v}.linux-amd64/amtool /usr/local/bin/
+
+# Create config directory
+sudo mkdir -p /etc/alertmanager
+
+# Move default config
+sudo mv alertmanager-${LATEST#v}.linux-amd64/alertmanager.yml /etc/alertmanager/
+
+# Create alertmanager user
 sudo useradd --no-create-home --shell /sbin/nologin alertmanager
+
+# Set permissions
 sudo chown -R alertmanager:alertmanager /etc/alertmanager
+sudo chown alertmanager:alertmanager /usr/local/bin/alertmanager
+sudo chown alertmanager:alertmanager /usr/local/bin/amtool
 ```
 
 **Why:**  
