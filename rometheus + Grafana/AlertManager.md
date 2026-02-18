@@ -30,21 +30,21 @@ curl -LO https://github.com/prometheus/alertmanager/releases/download/${LATEST}/
 # Extract
 tar -xvf alertmanager-${LATEST#v}.linux-amd64.tar.gz
 
-# Move binaries
-sudo mv alertmanager-${LATEST#v}.linux-amd64/alertmanager /usr/local/bin/
-sudo mv alertmanager-${LATEST#v}.linux-amd64/amtool /usr/local/bin/
+# Move binaries (overwrite if already exist)
+sudo mv -f alertmanager-${LATEST#v}.linux-amd64/alertmanager /usr/local/bin/
+sudo mv -f alertmanager-${LATEST#v}.linux-amd64/amtool /usr/local/bin/
 
 # Create config directory
 sudo mkdir -p /etc/alertmanager
 
-# Move default config
-sudo mv alertmanager-${LATEST#v}.linux-amd64/alertmanager.yml /etc/alertmanager/
+# Move default config (overwrite if exists)
+sudo mv -f alertmanager-${LATEST#v}.linux-amd64/alertmanager.yml /etc/alertmanager/
 
 # Create data directory (REQUIRED)
 sudo mkdir -p /etc/alertmanager/data
 
-# Create alertmanager user
-sudo useradd --no-create-home --shell /sbin/nologin alertmanager
+# Create alertmanager user if not exists
+id alertmanager &>/dev/null || sudo useradd --no-create-home --shell /sbin/nologin alertmanager
 
 # Set permissions
 sudo chown -R alertmanager:alertmanager /etc/alertmanager
