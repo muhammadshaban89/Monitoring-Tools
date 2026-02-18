@@ -569,20 +569,15 @@ In Grafana:
 
 ---
 
+Where do Grafana Dashboard IDs come from?
 
-## 11. Firewall checklist (RHEL side)
+-------
 
-```bash
-sudo firewall-cmd --permanent --add-port=9090/tcp   # Prometheus UI
-sudo firewall-cmd --permanent --add-port=3000/tcp   # Grafana UI
-sudo firewall-cmd --permanent --add-port=9100/tcp   # node_exporter (if you want remote access)
-sudo firewall-cmd --reload
-```
+Every dashboard uploaded to Grafana.com gets a unique numeric ID.
+Example:
+• 	1860 → Node Exporter Full (Linux server monitoring)
+• 	3662 → Prometheus 2.0 Stats
+• 	2129 → Windows Server Dashboard
+• 	7587 → Blackbox Exporter Dashboard
+These IDs are created automatically by Grafana.com when someone publishes a dashboard.
 
-**Explanation:**
-
-- `firewall-cmd --permanent` adds rules to the persistent configuration.
-- `--reload` applies them without reboot.
-- You may restrict sources (e.g., only your admin IP) later for security.
-
----
