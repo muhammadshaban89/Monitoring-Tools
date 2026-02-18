@@ -62,14 +62,21 @@ sudo mkdir /etc/prometheus /var/lib/prometheus
 
 ```bash
 cd /tmp
-curl -LO https://github.com/prometheus/prometheus/releases/latest/download/prometheus-*.linux-amd64.tar.gz
-tar -xvf prometheus-*.linux-amd64.tar.gz
-cd prometheus-*.linux-amd64
+
+LATEST=$(curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | grep tag_name | cut -d '"' -f 4)
+
+curl -LO https://github.com/prometheus/prometheus/releases/download/${LATEST}/prometheus-${LATEST#v}.linux-amd64.tar.gz
+
+tar -xvf prometheus-${LATEST#v}.linux-amd64.tar.gz
+
+cd prometheus-${LATEST#v}.linux-amd64
 
 sudo mv prometheus promtool /usr/local/bin/
+sudo mkdir -p /etc/prometheus
 sudo mv consoles console_libraries /etc/prometheus/
 sudo mv prometheus.yml /etc/prometheus/prometheus.yml
 
+sudo useradd --no-create-home --shell /bin/false prometheus
 sudo chown -R prometheus:prometheus /etc/prometheus /var/lib/prometheus
 ```
 
