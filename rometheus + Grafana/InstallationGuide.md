@@ -530,6 +530,9 @@ sudo systemctl restart prometheus
 
 In Grafana (`http://<RHEL-IP>:3000`):
 
+- It will ask you Credentials
+- Provide `admin` as user `admin` as password.
+  
 1. Go to **Configuration → Data sources → Add data source**.
 2. Select **Prometheus**.
 3. Set URL:
@@ -537,7 +540,10 @@ In Grafana (`http://<RHEL-IP>:3000`):
    ```text
    http://localhost:9090
    ```
-
+- OR:
+  ```
+  http://ip-address-of-server:9090
+  ```
 4. Click **Save & test**.
 
 **Explanation:**
