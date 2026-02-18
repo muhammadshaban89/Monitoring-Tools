@@ -40,6 +40,9 @@ sudo mkdir -p /etc/alertmanager
 # Move default config
 sudo mv alertmanager-${LATEST#v}.linux-amd64/alertmanager.yml /etc/alertmanager/
 
+# Create data directory (REQUIRED)
+sudo mkdir -p /etc/alertmanager/data
+
 # Create alertmanager user
 sudo useradd --no-create-home --shell /sbin/nologin alertmanager
 
