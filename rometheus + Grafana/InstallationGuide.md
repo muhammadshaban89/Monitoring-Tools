@@ -63,20 +63,32 @@ sudo mkdir /etc/prometheus /var/lib/prometheus
 ```bash
 cd /tmp
 
+# Get latest Prometheus version
 LATEST=$(curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | grep tag_name | cut -d '"' -f 4)
 
+# Download correct tarball
 curl -LO https://github.com/prometheus/prometheus/releases/download/${LATEST}/prometheus-${LATEST#v}.linux-amd64.tar.gz
 
+# Extract
 tar -xvf prometheus-${LATEST#v}.linux-amd64.tar.gz
-
 cd prometheus-${LATEST#v}.linux-amd64
 
+# Move binaries
 sudo mv prometheus promtool /usr/local/bin/
+
+# Create Prometheus config directory
 sudo mkdir -p /etc/prometheus
-sudo mv consoles console_libraries /etc/prometheus/
+
+# Move default config
 sudo mv prometheus.yml /etc/prometheus/prometheus.yml
 
+# Create Prometheus user
 sudo useradd --no-create-home --shell /bin/false prometheus
+
+# Create data directory
+sudo mkdir -p /var/lib/prometheus
+
+# Set ownership
 sudo chown -R prometheus:prometheus /etc/prometheus /var/lib/prometheus
 ```
 
