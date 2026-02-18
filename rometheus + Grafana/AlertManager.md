@@ -227,6 +227,10 @@ for i in {1..4}; do while :; do :; done & done
 killall bash
 ```
 
+- You can put dummy load on memory:
+```
+stress --vm 2 --vm-bytes 1G --timeout 60s
+```
 ---
 
 # 7️ Firewall + SELinux for Alertmanager
