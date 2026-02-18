@@ -184,6 +184,15 @@ groups:
     annotations:
       summary: "High CPU usage"
       description: "CPU usage > 80% on {{ $labels.instance }}"
+
+  - alert: HighMemoryUsage
+    expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High memory usage"
+      description: "Memory usage > 80% on {{ $labels.instance }} (current value: {{ $value }}%)"
 ```
 
 Now include rule file in Prometheus config:
