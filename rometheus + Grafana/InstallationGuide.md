@@ -185,9 +185,23 @@ This lets you monitor the RHEL monitoring server itself.
 sudo useradd --no-create-home --shell /sbin/nologin node_exporter
 
 cd /tmp
-curl -LO https://github.com/prometheus/node_exporter/releases/latest/download/node_exporter-*.linux-amd64.tar.gz
-tar -xvf node_exporter-*.linux-amd64.tar.gz
-sudo mv node_exporter-*/node_exporter /usr/local/bin/
+
+# Get latest node_exporter version
+LATEST=$(curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep tag_name | cut -d '"' -f 4)
+
+# Download correct tarball
+curl -LO https://github.com/prometheus/node_exporter/releases/download/${LATEST}/node_exporter-${LATEST#v}.linux-amd64.tar.gz
+
+# Extract
+tar -xvf node_exporter-${LATEST#v}.linux-amd64.tar.gz
+
+# Move binary
+sudo mv node_exporter-${LATEST#v}.linux-amd64/node_exporter /usr/local/bin/
+
+# Create node_exporter user
+sudo useradd --no-create-home --shell /bin/false node_exporter
+
+# Set ownership
 sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
 ```
 
