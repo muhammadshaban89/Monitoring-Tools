@@ -569,15 +569,20 @@ In Grafana:
 
 ---
 
-Where do Grafana Dashboard IDs come from?
-
+### Where do Grafana Dashboard IDs come from?
 -------
 
-Every dashboard uploaded to Grafana.com gets a unique numeric ID.
+- Every dashboard uploaded to Grafana.com gets a unique numeric ID.
+  
 Example:
+
 • 	1860 → Node Exporter Full (Linux server monitoring)
+
 • 	3662 → Prometheus 2.0 Stats
+
 • 	2129 → Windows Server Dashboard
+
 • 	7587 → Blackbox Exporter Dashboard
+
 These IDs are created automatically by Grafana.com when someone publishes a dashboard.
 
