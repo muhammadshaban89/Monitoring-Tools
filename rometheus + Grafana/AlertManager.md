@@ -207,6 +207,17 @@ Prometheus UI → **Alerts**
 Alertmanager UI → **Alerts**  
 You should see firing alerts when conditions match.
 
+- For example putt dummy load on CPU by:
+```
+for i in {1..4}; do while :; do :; done & done
+```
+
+- You will see high CPU usage on DashBoard.
+- To remove dummy load:
+```
+killall bash
+```
+
 ---
 
 # 7️ Firewall + SELinux for Alertmanager
